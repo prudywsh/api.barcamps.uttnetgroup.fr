@@ -7,6 +7,6 @@ script: python manage.py test
 deploy:
     provider: script
     skip_cleanup: true
-    script: sh deploy.sh
+    script: bash deploy.sh
     on:
         all_branches: true
