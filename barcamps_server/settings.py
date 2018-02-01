@@ -25,7 +25,7 @@ SECRET_KEY = '6k#((=#b5!@lbg-7turt9p8yu2*ulhbq$a-zz$zn!*3b!==_l%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api.barcamps.uttnetgroup.fr']
 
 
 # Application definition
