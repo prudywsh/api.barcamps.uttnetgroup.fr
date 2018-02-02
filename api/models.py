@@ -4,6 +4,7 @@ from django.db import models
 class Barcamp(models.Model):
     # fields
     title = models.CharField(max_length=200, unique=True)
+    description = models.TextField()
     date = models.DateTimeField(unique=True)
 
 class Speaker(models.Model):
@@ -14,8 +15,8 @@ class Speaker(models.Model):
 
 class Talk(models.Model):
     # relations
-    barcamp = models.ForeignKey(Barcamp, on_delete=models.CASCADE)
-    speaker = models.ForeignKey(Speaker, on_delete=models.CASCADE)
+    barcamp = models.ForeignKey(Barcamp, related_name="talks", on_delete=models.CASCADE)
+    speaker = models.ForeignKey(Speaker, related_name="talks", on_delete=models.CASCADE)
     # fields
     title = models.CharField(max_length=200)
     description = models.TextField()
