@@ -23,7 +23,7 @@ class TalkWithSpeakerSerializer(TalkUnrelatedSerializer):
     class Meta(TalkUnrelatedSerializer.Meta):
         fields = (*TalkUnrelatedSerializer.Meta.fields, 'speaker')
 
-class TalkWithSpeakerSerializer(TalkUnrelatedSerializer):
+class TalkWithBarcampSerializer(TalkUnrelatedSerializer):
     barcamp = BarcampUnrelatedSerializer(source='barcamp_id', read_only=True)
     class Meta(TalkUnrelatedSerializer.Meta):
         fields = (*TalkUnrelatedSerializer.Meta.fields, 'barcamp')
@@ -35,12 +35,12 @@ class AdminSerializer(serializers.ModelSerializer):
         fields = ('id', 'email')
 
 class SpeakerSerializer(SpeakerUnrelatedSerializer):
-    talks = TalkWithSpeakerSerializer(source="talks_ids", many=True, read_only=True)
+    talks = TalkWithBarcampSerializer(source="talks_ids", many=True, read_only=True)
     class Meta(SpeakerUnrelatedSerializer.Meta):
         fields = (*SpeakerUnrelatedSerializer.Meta.fields, 'talks')
 
 class TalkSerializer(TalkUnrelatedSerializer):
-    speaker = SpeakerSerializer(source='speaker_id', read_only=True)
+    speaker = SpeakerUnrelatedSerializer(source='speaker_id', read_only=True)
     barcamp = BarcampUnrelatedSerializer(source='barcamp_id', read_only=True)
     class Meta(TalkUnrelatedSerializer.Meta):
         fields = (*TalkUnrelatedSerializer.Meta.fields, 'barcamp', 'speaker')
