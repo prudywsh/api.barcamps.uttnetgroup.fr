@@ -15,8 +15,8 @@ class Speaker(models.Model):
 
 class Talk(models.Model):
     # relations
-    barcamp = models.ForeignKey(Barcamp, related_name="talks", on_delete=models.CASCADE)
-    speaker = models.ForeignKey(Speaker, related_name="talks", on_delete=models.CASCADE)
+    barcamp_id = models.ForeignKey(Barcamp, related_name="talks_ids", on_delete=models.CASCADE)
+    speaker_id = models.ForeignKey(Speaker, related_name="talks_ids", on_delete=models.CASCADE)
     # fields
     title = models.CharField(max_length=200)
     description = models.TextField()
