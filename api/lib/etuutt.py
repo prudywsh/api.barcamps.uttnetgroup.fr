@@ -37,3 +37,21 @@ def get_access_code(authorization_code):
     res_body = json.loads(res.read().decode(res.info().get_param('charset') or 'utf-8'))
     # return access token and refresh token
     return res_body['access_token'], res_body['refresh_token']
+
+def get_user_info(access_token):
+    """ Get info about the user, given his access_token
+
+        Args:
+            access_token -- string
+
+        return dic
+    """
+    # prepare request
+    uri = os.environ.get('ETUUTT_BASE_URI') + 'public/user/account?access_token=' \
+        + access_token
+    # make request
+    res = urlopen(uri)
+    # parse response
+    res_body = json.loads(res.read().decode(res.info().get_param('charset') or 'utf-8'))
+    # return data about the user
+    return res_body['data']
