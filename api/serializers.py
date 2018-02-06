@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Barcamp, Speaker, Talk, Admin
+from .models import Barcamp, Speaker, Talk
 
 # define unrelated serializers
 class BarcampUnrelatedSerializer(serializers.ModelSerializer):
@@ -29,11 +29,6 @@ class TalkWithBarcampSerializer(TalkUnrelatedSerializer):
         fields = (*TalkUnrelatedSerializer.Meta.fields, 'barcamp')
 
 # define serializers
-class AdminSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Admin
-        fields = ('id', 'email')
-
 class SpeakerSerializer(SpeakerUnrelatedSerializer):
     talks = TalkWithBarcampSerializer(source="talks_ids", many=True, read_only=True)
     class Meta(SpeakerUnrelatedSerializer.Meta):

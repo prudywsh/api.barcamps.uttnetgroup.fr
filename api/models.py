@@ -21,7 +21,3 @@ class Talk(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     slides_name = models.CharField(max_length=200, unique=True)
-
-class Admin(models.Model):
-    # fields
-    email = models.EmailField(unique=True)

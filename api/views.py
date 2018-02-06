@@ -1,10 +1,12 @@
 from django.http import HttpResponse
-from .models import Barcamp, Speaker, Talk, Admin
+from .models import Barcamp, Speaker, Talk
 from .serializers import BarcampSerializer, TalkSerializer, SpeakerSerializer
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from.lib.etuutt import get_redirect_link, get_access_code, get_user_info
+from .lib.etuutt import get_redirect_link, get_access_code, get_user_info
+import jwt
+import os
 
 # Create your views here.
 def index(request):
@@ -52,6 +54,11 @@ class OauthToken(APIView):
         access_token, refresh_token = get_access_code(authorization_code)
         # get info about the user
         user_info = get_user_info(access_token)
-        print(user_info)
 
-        return Response(access_token)
+        user_jwt = jwt.encode({
+            'email': user_info['email'],
+            'firstName': user_info['firstName'],
+            'lastName': user_info['lastName'],
+        }, os.environ.get('JWT_SECRET'), algorithm='HS256')
+
+        return Response(user_jwt)

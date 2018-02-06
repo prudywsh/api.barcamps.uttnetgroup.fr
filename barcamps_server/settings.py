@@ -20,7 +20,6 @@ load_dotenv(dotenv_path)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -80,6 +79,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'barcamps_server.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'barcamps_server.auth.CustomAuthentication',
+    )
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
