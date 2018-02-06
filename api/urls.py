@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    url(r'^oauth/token/$', views.OauthToken.as_view()),
     url(r'^barcamp/$', views.BarcampList.as_view()),
     url(r'^barcamp/(?P<pk>[0-9]+)/$', views.BarcampDetail.as_view()),
     url(r'^talk/$', views.TalkList.as_view()),
