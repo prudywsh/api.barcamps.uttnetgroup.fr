@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from .models import Barcamp, Speaker, Talk
 from .serializers import BarcampSerializer, TalkSerializer, SpeakerSerializer
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .lib.etuutt import get_redirect_link, get_access_code, get_user_info
@@ -37,6 +37,8 @@ class SpeakerDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SpeakerSerializer
 
 class OauthToken(APIView):
+    # allow anyone to POST
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         """ Return auth link
