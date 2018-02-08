@@ -10,7 +10,7 @@ class BarcampUnrelatedSerializer(serializers.ModelSerializer):
 class TalkUnrelatedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Talk
-        fields = ('id', 'title', 'description', 'slides_name', 'barcamp_id', 'speaker_id')
+        fields = ('id', 'title', 'description', 'slides', 'barcamp_id', 'speaker_id')
 
 class SpeakerUnrelatedSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 # Create your models here.
 class Barcamp(models.Model):
@@ -20,4 +21,4 @@ class Talk(models.Model):
     # fields
     title = models.CharField(max_length=200)
     description = models.TextField()
-    slides_name = models.CharField(max_length=200, unique=True)
+    slides = models.FileField(null=True)
