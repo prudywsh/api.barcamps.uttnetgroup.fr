@@ -21,4 +21,4 @@ class Talk(models.Model):
     # fields
     title = models.CharField(max_length=200)
     description = models.TextField()
-    slides = models.FileField(null=True)
+    slides = models.FileField(null=True, upload_to='slides')
