@@ -13,8 +13,14 @@ class CustomAuthentication(BaseAuthentication):
         if not authorization_header:
             return None # not authenticated
 
+        # get JWT from authorization header:
+        # authorization: Bearer <jwt>
+        splitted_authorization = authorization_header.split(' ')
+        if len(splitted_authorization) < 2:
+            return None # Wrong authorization header
+
         # decode the jwt
-        user_jwt = authorization_header.split()[1]
+        user_jwt = splitted_authorization[1]
         payload = jwt.decode(user_jwt, os.environ.get('JWT_SECRET'), algorithms=['HS256'])
 
         try:
