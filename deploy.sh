@@ -14,10 +14,6 @@ if [[ -n $encrypted_e378bde8517e_key ]] ; then
     # Add dokku to known hosts
     ssh-keyscan -H $DOKKU_HOST >> ~/.ssh/known_hosts
     # Prepare build directory
-    mkdir deploy
-    mv dist deploy/
-    mv static.json deploy/
-    cd deploy
     git init
     git add . -A
     git config user.name "Travis"
