@@ -13,12 +13,6 @@ if [[ -n $encrypted_e378bde8517e_key ]] ; then
     echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     # Add dokku to known hosts
     ssh-keyscan -H $DOKKU_HOST >> ~/.ssh/known_hosts
-    # Prepare build directory
-    git init
-    git add . -A
-    git config user.name "Travis"
-    git config user.email "ung@utt.fr"
-    git commit -m "Deploy"
     # Deploy
     git remote add dokku dokku@$DOKKU_HOST:$DOKKU_PROD
     git push dokku master -f
