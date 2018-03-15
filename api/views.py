@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render
+from django.views.decorators.http import require_safe
 from django.contrib.auth.models import User
 from .models import Barcamp, Speaker, Talk
 from .serializers import BarcampSerializer, TalkSerializer, SpeakerSerializer
@@ -10,9 +12,9 @@ from .lib.etuutt import get_redirect_link, get_access_code, get_user_info
 import jwt
 import os
 
-# Create your views here.
+@require_safe
 def index(request):
-    return HttpResponse("Barcamps API.")
+    return render(request, 'api/templates/index.html')
 
 class BarcampList(generics.ListCreateAPIView):
     queryset = Barcamp.objects.all()
